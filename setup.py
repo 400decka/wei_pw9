@@ -1,6 +1,9 @@
-from setuptools import find_packages, setup
-from glob import glob
+"""Setup configuration for the wei_pw9 ROS package."""
+
 import os
+from glob import glob
+
+from setuptools import find_packages, setup
 
 package_name = 'wei_pw9'
 
@@ -12,20 +15,20 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name), glob('launch/*launch.[pxy][yma]*')), 
+        (os.path.join('share', package_name),
+         glob('launch/*launch.[pxy][yma]*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='todo',
-    maintainer_email='todo@todo.com',
-    description='TODO: Package description',
+    maintainer='wei_pw9 contributors',
+    maintainer_email='maintainers@example.com',
+    description='Battery voltage publisher and monitor for ROS 2',
     license='GNU General Public License v3.0',
     tests_require=['pytest'],
     entry_points={
-    'console_scripts': [
-        'battery_publisher = wei_pw9.battery_publisher:main',
-        'battery_monitor = wei_pw9.battery_monitor:main',
+        'console_scripts': [
+            'battery_publisher = wei_pw9.battery_publisher:main',
+            'battery_monitor = wei_pw9.battery_monitor:main',
         ],
     },
-
 )
