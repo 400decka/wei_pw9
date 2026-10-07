@@ -1,59 +1,29 @@
-# `ros2_py_template` package
-ROS 2 python package.  [![Static Badge](https://img.shields.io/badge/ROS_2-Humble-34aec5)](https://docs.ros.org/en/humble/)
-## Packages and build
+# Autonóm Járművek és Robotok Programozása - Kis Beadandó
 
-It is assumed that the workspace is `~/ros2_ws/`.
+Ez a package egy ROS 2 Humble alatt futó egyszerű szimuláció, amely egy jármű akkumulátorának feszültségét publikálja, illetve monitorozza azt.
+A csomag két node-ból áll:
+1. `battery_publisher`: Másodpercenként véletlenszerű feszültségadatokat (11.5V - 14.5V) publikál.
+2. `battery_monitor`: Feliratkozik a feszültségadatokra, és `WARNING` szintű logolást végez, ha az érték 12.0V alá esik.
 
-### Clone the packages
-``` r
-cd ~/ros2_ws/src
-```
-``` r
-git clone https://github.com/sze-info/ros2_py_template
-```
+## Rendszerkövetelmények
+- ROS 2 Humble
+- Python 3
 
-### Build ROS 2 packages
-``` r
+## Build és Futtatás
+
+1. Workspace inicializálása és build:
+bash
 cd ~/ros2_ws
-```
-``` r
-colcon build --packages-select ros2_py_template --symlink-install
-```
-
-<details>
-<summary> Don't forget to source before ROS commands.</summary>
-
-``` bash
-source ~/ros2_ws/install/setup.bash
-```
-</details>
-
-``` r
-ros2 launch ros2_py_template launch_example1.launch.py
-```
-
-# Delete this part if you are using it as a template
-
-ROS 2 pacage template, to get started, use template by clicking on the Green button labeled [`Use this template`](https://github.com/sze-info/ros2_py_template/generate) / [`Create new repository`](https://github.com/sze-info/ros2_py_template/generate). 
-
-<p align="center"><img src="img/use_this_template01.png" width="60%" /></p>
-
-
-Let's assume 
-- your Github username is `mycoolusername`
-- your ROS 2 repo shold be `cool_ros2_package`
-
-Replace everything in the cloned repo:
-
-- `ros2_py_template` >> `cool_ros2_package` (the folder was already renamed after `Use this template`)
-- `sze-info` >> `mycoolusername`
-- find all `todo` strings and fill the blanks
-
-The easiest way is VS code:
-
-<p align="center"><img src="img/replace01.png" width="90%" /></p>
-
-> [!IMPORTANT]  
-> Don't forget to rename the directory (folder) and the file too.
-
-Now `colcon build` your ROS 2 package and you can start wokring.
+colcon build --packages-select wei_pw9
+source install/setup.bash
+2. Publisher futtatára (egyik terminál):
+bash
+ros2 run wei_pw9 battery_publisher
+3. Monitor futtatása (második terminál):
+bash
+ros2 run wei_pw9 battery_monitor
+## Node és Topic felépítés
+mermaid
+graph LR
+A[battery_publisher]-->|/battery_voltage std_msgs/Float32|
+B[battery_monitor]

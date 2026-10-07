@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 from glob import glob
 import os
 
-package_name = 'ros2_py_template'
+package_name = 'wei_pw9'
 
 setup(
     name=package_name,
@@ -22,8 +22,10 @@ setup(
     license='GNU General Public License v3.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-            # 'control_vehicle = ros2_py_template.control_vehicle:main',
+    'console_scripts': [
+        'battery_publisher = wei_pw9.battery_publisher:main',
+        'battery_monitor = wei_pw9.battery_monitor:main',
         ],
     },
+
 )
